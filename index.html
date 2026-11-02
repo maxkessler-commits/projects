@@ -32,7 +32,8 @@
   img, svg { display: block; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
-  main { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; padding: clamp(32px, 8vw, 96px) 0; }
+  body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+  main { flex: 1; display: flex; align-items: center; padding: clamp(24px, 6vw, 72px) 0 clamp(48px, 10vw, 120px); }
   main .wrap { width: 100%; }
 
   /* sketch strokes: draw in when scrolled into view */
@@ -47,7 +48,18 @@
     html { scroll-behavior: auto; }
   }
 
-  /* 4. projects */
+  /* top bar */
+  .top { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .mark { font-weight: 600; font-size: 16px; letter-spacing: -.01em; text-decoration: none; }
+  .btn {
+    display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px;
+    background: var(--ink); color: var(--paper); font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: transform .15s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .top a:focus-visible { outline-offset: 3px; }
+
+  /* projects */
   .grid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
   .proj { background: var(--paper); padding: 28px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; min-height: 300px; transition: background .2s; }
   a.proj:hover { background: #FBF9F5; }
@@ -67,9 +79,16 @@
 </head>
 <body>
 
+<div class="wrap" style="width:100%">
+  <header class="top">
+    <a class="mark" href="https://maxkessler.com">Max Kessler</a>
+    <a class="btn" href="mailto:hi@maxkessler.com">Say hi</a>
+  </header>
+</div>
+
 <main class="sk">
   <div class="wrap">
-    <h1 class="sr">Max Kessler — side projects</h1>
+    <h1 class="sr">Side projects</h1>
     <div class="grid">
       <a class="proj" href="https://maxkessler-commits.github.io/moviepickem/" target="_blank" rel="noopener">
         <svg class="doodle draw" viewBox="0 0 64 64" fill="none" aria-hidden="true">

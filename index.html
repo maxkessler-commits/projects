@@ -93,15 +93,6 @@
   .note-start svg { width: 70px; height: 60px; color: var(--accent); margin-top: 10px; }
   .note-start span { font-size: 22px; color: var(--ink); transform: rotate(-4deg); white-space: nowrap; margin-top: -4px; }
 
-  /* 3. how */
-  .steps { display: grid; gap: 40px; margin-top: 56px; position: relative; list-style: none; counter-reset: s; }
-  .step { position: relative; }
-  .step .n { font-size: 15px; font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-  .step h3 { font-size: 20px; font-weight: 500; letter-spacing: -.015em; margin-top: 10px; }
-  .step p { color: var(--ink-2); margin-top: 8px; max-width: 34ch; }
-  .squiggle { display: none; }
-  .squiggle-v { position: absolute; left: -2px; top: 0; height: 100%; width: 22px; color: var(--ink); opacity: .55; display: none; }
-
   /* 4. projects */
   .grid { display: grid; gap: 1px; margin-top: 56px; background: var(--rule); border: 1px solid var(--rule); }
   .proj { background: var(--paper); padding: 28px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; min-height: 300px; transition: background .2s; }
@@ -141,14 +132,10 @@
 
   @media (min-width: 760px) {
     .nav .opt { display: inline; }
-    .steps { grid-template-columns: repeat(3, 1fr); gap: 48px; }
-    .squiggle { display: block; position: absolute; left: 0; right: 0; top: -34px; width: 100%; height: 30px; color: var(--ink); opacity: .55; }
     .grid { grid-template-columns: repeat(3, 1fr); }
     .details div { grid-template-columns: 220px 1fr; gap: 32px; }
   }
   @media (max-width: 759px) {
-    .steps { padding-left: 36px; }
-    .squiggle-v { display: block; }
     .note-start { left: 120px; }
   }
 </style>
@@ -160,7 +147,6 @@
   <header class="top">
     <a class="mark" href="https://maxkessler.com">Max Kessler</a>
     <nav class="nav" aria-label="Main">
-      <a class="opt" href="#how">How</a>
       <a href="#projects">Projects</a>
       <a class="btn btn-sm" href="mailto:hi@maxkessler.com">Say hi</a>
     </nav>
@@ -181,21 +167,6 @@
     </div>
   </section>
 </div>
-
-<!-- 3. How it works -->
-<section id="how" class="sk">
-  <div class="wrap">
-    <p class="eyebrow">How they get made</p>
-    <h2>Every project starts as a small problem at home.</h2>
-    <ol class="steps">
-      <svg class="squiggle draw" viewBox="0 0 1000 30" preserveAspectRatio="none" fill="none" aria-hidden="true"><path pathLength="1" d="M4 18 C 60 4, 110 28, 170 15 S 280 6, 330 16 M330 16 l -10 -7 M330 16 l -11 5 M372 15 C 430 3, 480 27, 540 14 S 650 5, 700 16 M700 16 l -10 -7 M700 16 l -11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
-      <svg class="squiggle-v draw" viewBox="0 0 22 400" preserveAspectRatio="none" fill="none" aria-hidden="true"><path pathLength="1" d="M10 6 C 2 60, 18 110, 9 170 S 3 280, 11 394" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
-      <li class="step"><span class="n">01</span><h3>Notice</h3><p>Something at home takes too long or isn't much fun, like spending half an hour choosing a movie.</p></li>
-      <li class="step"><span class="n">02</span><h3>Sketch</h3><p>Rough it out on paper, then build the smallest version that works in a single evening.</p></li>
-      <li class="step"><span class="n">03</span><h3>Ship</h3><p>Put it on the web, hand it to the kids and watch what breaks. Then fix that.</p></li>
-    </ol>
-  </div>
-</section>
 
 <!-- 4. Projects -->
 <section id="projects" class="sk">

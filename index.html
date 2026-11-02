@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FFFEFD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #FFFEFD;
@@ -18,7 +18,6 @@
     --rule: #E6E4E0;
     --accent: #F2643D;
     --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    --hand: "Patrick Hand", "Comic Sans MS", cursive;
     --max: 1120px;
     --gut: clamp(20px, 5vw, 48px);
   }
@@ -31,17 +30,10 @@
   }
   a { color: inherit; }
   img, svg { display: block; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
-  .eyebrow {
-    font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--ink-3);
-  }
-  .hand { font-family: var(--hand); font-weight: 400; letter-spacing: 0; }
-  section { padding: clamp(72px, 12vw, 136px) 0; border-top: 1px solid var(--rule); }
-  h2 {
-    font-size: clamp(30px, 4.4vw, 44px); font-weight: 500; line-height: 1.1; letter-spacing: -.025em;
-    max-width: 18ch; margin-top: 14px;
-  }
+  main { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; padding: clamp(32px, 8vw, 96px) 0; }
+  main .wrap { width: 100%; }
 
   /* sketch strokes: draw in when scrolled into view */
   .draw path, path.draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
@@ -55,46 +47,8 @@
     html { scroll-behavior: auto; }
   }
 
-  /* buttons */
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    height: 48px; padding: 0 22px; border-radius: 999px;
-    background: var(--ink); color: var(--paper);
-    font-size: 16px; font-weight: 500; text-decoration: none;
-    transition: transform .15s;
-  }
-  .btn:hover { transform: translateY(-1px); }
-  .btn:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-  .btn-sm { height: 38px; padding: 0 16px; font-size: 14px; }
-  .link { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
-  .link:hover { border-color: var(--ink); }
-
-  /* 1. top bar */
-  .top { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .mark { font-weight: 600; font-size: 16px; letter-spacing: -.01em; text-decoration: none; }
-  .nav { display: flex; align-items: center; gap: 28px; font-size: 14px; color: var(--ink-2); }
-  .nav a:not(.btn) { text-decoration: none; }
-  .nav a:not(.btn):hover { color: var(--ink); }
-  .nav .opt { display: none; }
-
-  /* 2. hero */
-  .hero { padding: clamp(56px, 11vw, 128px) 0 clamp(72px, 12vw, 136px); border-top: 0; }
-  .hero h1 {
-    font-size: clamp(40px, 6.4vw, 64px); font-weight: 500; line-height: 1.05; letter-spacing: -.035em;
-    max-width: 15ch; margin-top: 18px;
-  }
-  .hero p.sub { margin-top: 22px; font-size: 18px; color: var(--ink-2); max-width: 46ch; }
-  .cta-row { position: relative; display: flex; align-items: center; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
-  .hero .cta-row { margin-top: 76px; }
-  .note-start {
-    position: absolute; left: 150px; top: -62px;
-    display: flex; align-items: flex-start; gap: 4px; pointer-events: none;
-  }
-  .note-start svg { width: 70px; height: 60px; color: var(--accent); margin-top: 10px; }
-  .note-start span { font-size: 22px; color: var(--ink); transform: rotate(-4deg); white-space: nowrap; margin-top: -4px; }
-
   /* 4. projects */
-  .grid { display: grid; gap: 1px; margin-top: 56px; background: var(--rule); border: 1px solid var(--rule); }
+  .grid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
   .proj { background: var(--paper); padding: 28px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; min-height: 300px; transition: background .2s; }
   a.proj:hover { background: #FBF9F5; }
   .proj .doodle { width: 64px; height: 64px; color: var(--ink); }
@@ -105,74 +59,17 @@
   a.proj:hover .go span { transform: translate(2px, -2px); }
   .proj.soon h3, .proj.soon p { color: var(--ink-3); }
 
-  /* 5. proof */
-  .proof blockquote {
-    font-size: clamp(28px, 4.6vw, 48px); font-weight: 500; line-height: 1.15; letter-spacing: -.03em;
-    max-width: 20ch; margin-top: 18px;
-  }
-  .circled { position: relative; white-space: nowrap; display: inline-block; }
-  .circled svg { position: absolute; left: -9%; top: -14%; width: 118%; height: 132%; color: var(--accent); overflow: visible; pointer-events: none; }
-  .proof cite { display: block; margin-top: 28px; font-style: normal; font-size: 15px; color: var(--ink-2); }
-
-  /* 6. details */
-  .details { display: grid; gap: 0; margin-top: 48px; border-top: 1px solid var(--ink); }
-  .details div { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
-  .details dt { font-weight: 500; }
-  .details dd { color: var(--ink-2); max-width: 60ch; }
-
-  /* 7. final cta */
-  .final { text-align: left; }
-  .final h2 { max-width: 16ch; }
-  .final .cta-row { margin-top: 32px; }
-  .u { position: relative; display: inline-block; }
-  .u svg { position: absolute; left: -4px; right: -4px; bottom: -14px; width: calc(100% + 8px); height: 14px; color: var(--accent); overflow: visible; }
-  footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
-  footer .eyebrow a { text-decoration: none; }
-  footer .eyebrow a:hover { color: var(--ink); }
-
   @media (min-width: 760px) {
-    .nav .opt { display: inline; }
     .grid { grid-template-columns: repeat(3, 1fr); }
-    .details div { grid-template-columns: 220px 1fr; gap: 32px; }
   }
-  @media (max-width: 759px) {
-    .note-start { left: 120px; }
-  }
+  a:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <!-- 1. Top bar -->
-  <header class="top">
-    <a class="mark" href="https://maxkessler.com">Max Kessler</a>
-    <nav class="nav" aria-label="Main">
-      <a href="#projects">Projects</a>
-      <a class="btn btn-sm" href="mailto:hi@maxkessler.com">Say hi</a>
-    </nav>
-  </header>
-
-  <!-- 2. Hero -->
-  <section class="hero sk">
-    <p class="eyebrow">Side projects · 2026</p>
-    <h1>Small tools and games, built at home.</h1>
-    <p class="sub">A designer's evening projects: things made for my family, tested at the kitchen table, then put on the web for anyone.</p>
-    <div class="cta-row">
-      <a class="btn" href="#projects">See the projects <span aria-hidden="true">↓</span></a>
-      <a class="link" href="/paper-route/" style="font-size:15px">or play Paper Route</a>
-      <div class="note-start" aria-hidden="true">
-        <svg class="draw" viewBox="0 0 70 60" fill="none"><path pathLength="1" d="M66 6 C 50 10, 30 18, 18 40 M18 40 l -2 -12 M18 40 l 11 -5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="hand fade">start here</span>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- 4. Projects -->
-<section id="projects" class="sk">
+<main class="sk">
   <div class="wrap">
-    <p class="eyebrow">Projects</p>
-    <h2>What's on the bench.</h2>
+    <h1 class="sr">Max Kessler — side projects</h1>
     <div class="grid">
       <a class="proj" href="https://maxkessler-commits.github.io/moviepickem/" target="_blank" rel="noopener">
         <svg class="doodle draw" viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -205,50 +102,9 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- 5. Proof point -->
-<section class="proof sk">
-  <div class="wrap">
-    <p class="eyebrow">The rule</p>
-    <blockquote>The best test audience is the one at your <span class="circled">kitchen table.<svg class="draw" viewBox="0 0 200 70" preserveAspectRatio="none" fill="none" aria-hidden="true"><path pathLength="1" d="M112 5 C 55 1, 6 12, 4 35 C 2 60, 70 68, 122 65 C 172 62, 199 49, 196 30 C 193 10, 148 2, 86 10" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span></blockquote>
-    <cite>Everything here gets played, broken and judged by my kids before anyone else sees it.</cite>
-  </div>
-</section>
-
-<!-- 6. Details -->
-<section class="sk">
-  <div class="wrap">
-    <p class="eyebrow">Details</p>
-    <dl class="details">
-      <div><dt>How they're built</dt><dd>Plain HTML, CSS and JavaScript, usually one file per project, with no accounts and no tracking.</dd></div>
-      <div><dt>Where they live</dt><dd>Hosted for free on GitHub Pages. They work in any browser on a phone, tablet or computer.</dd></div>
-      <div><dt>Can I use them?</dt><dd>Yes. Everything here is free to play and use. If something breaks, I'd like to hear about it.</dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- 7. Final CTA -->
-<section class="final sk">
-  <div class="wrap">
-    <p class="eyebrow">Next</p>
-    <h2>Got an idea for the next one?</h2>
-    <div class="cta-row">
-      <span class="u"><a class="btn" href="mailto:hi@maxkessler.com">Email me <span aria-hidden="true">→</span></a><svg class="draw" viewBox="0 0 200 14" preserveAspectRatio="none" fill="none" aria-hidden="true"><path pathLength="1" d="M2 9 C 50 3, 120 12, 198 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>
-      <span class="eyebrow" style="text-transform:none;letter-spacing:0;font-size:15px">hi@maxkessler.com</span>
-    </div>
-  </div>
-</section>
-
-<div class="wrap">
-  <footer>
-    <span class="eyebrow">© <span id="yr">2026</span> Max Kessler</span>
-    <span class="eyebrow"><a href="https://maxkessler.com">maxkessler.com</a></span>
-  </footer>
-</div>
+</main>
 
 <script>
-  document.getElementById("yr").textContent = new Date().getFullYear();
   const els = document.querySelectorAll(".sk");
   if (!("IntersectionObserver" in window)) els.forEach(e => e.classList.add("in"));
   else {

@@ -132,12 +132,42 @@ function drawKid(sx,sy,wa){
   R(sx-3,sy-27,6,6,SKIN);R(sx+1,sy-25,1,1,'#222');R(sx+2,sy-23,1,1,'#c98b5a');
   R(sx-4,sy-29,7,3,'#2a62d8');R(sx+3,sy-27,3,1,'#1a42a8');
 }
-function drawDog(x,y,t,run){shadow(x,y,20);const f=run?Math.floor(t*10)%2:0;
-  R(x-6,y-9,13,5,'#a0652d');R(x-6,y-9,13,1,'#c48042');
-  R(x-11,y-13,6,6,'#a0652d');R(x-12,y-10,2,3,'#a0652d');R(x-13,y-9,1,1,'#222');
-  R(x-10,y-12,1,1,'#222');R(x-8,y-14,2,3,'#5a3518');
-  R(x-5,y-4,2,f?4:3,'#7a4a20');R(x-1,y-4,2,f?3:4,'#7a4a20');R(x+2,y-4,2,f?4:3,'#7a4a20');R(x+5,y-4,2,f?3:4,'#7a4a20');
-  R(x+7,y-12+f,2,4,'#a0652d');R(x-7,y-7,1,1,'#e33')}
+function drawDog(x,y,t,run,c){c=c||'#a0652d';shadow(x,y,20);const f=run?Math.floor(t*10)%2:0;
+  const hi=c==='#2a2a2a'?'#4a4a4a':shade(c,1.15),lg=shade(c,.75),ear=c==='#ece6da'?'#7a5a3a':shade(c,.55),eye=c==='#2a2a2a'?'#ddd':'#222';
+  R(x-6,y-9,13,5,c);R(x-6,y-9,13,1,hi);if(c==='#ece6da'){R(x-2,y-8,3,2,'#3a3a3a');R(x+3,y-7,2,2,'#3a3a3a')}
+  R(x-11,y-13,6,6,c);R(x-12,y-10,2,3,c);R(x-13,y-9,1,1,'#222');
+  R(x-10,y-12,1,1,eye);R(x-8,y-14,2,3,ear);
+  R(x-5,y-4,2,f?4:3,lg);R(x-1,y-4,2,f?3:4,lg);R(x+2,y-4,2,f?4:3,lg);R(x+5,y-4,2,f?3:4,lg);
+  R(x+7,y-12+f,2,4,c);R(x-7,y-7,1,1,'#e33');if(run&&f)R(x-13,y-8,2,2,'#ff7a9a')}
+const DOGC=['#a0652d','#2a2a2a','#ece6da','#d8a040','#8a5a3a'];
+/* ---------- Dryden Road extras ---------- */
+function drawFirePit(x,y,t){shadow(x,y,22);
+  R(x-10,y-5,20,5,'#7a7a80');for(let i=0;i<5;i++)R(x-10+i*4,y-5,3,2,i%2?'#9a9aa2':'#8a8a92');
+  R(x-7,y-5,14,2,'#2a1a10');R(x-5,y-6,10,2,'#6b4a2b');R(x-3,y-7,6,1,'#8a5a3a');
+  for(let i=0;i<4;i++){const h=6+((t*14+i*5)|0)%6;R(x-5+i*3,y-6-h,3,h,'#ff6a1a');R(x-4+i*3,y-6-(h*.6|0),1,(h*.6|0),'#ffd84a')}
+  for(let i=0;i<3;i++){const k=(t*.8+i/3)%1;R(x-1+Math.round(Math.sin(t*2+i*2)*3),y-16-k*22,2,2,k<.25?'#ffb04a':'rgba(200,200,200,'+(1-k)*.6+')')}}
+function drawFireGuy(x,y,t,wave){shadow(x,y,18);const NAVY='#0b2547',GRN='#69be28',GRY='#a5acaf';
+  line(x-6,y,x+5,y-8,'#555');line(x+5,y,x-6,y-8,'#555');R(x-7,y-10,13,3,'#2a62d8');R(x+3,y-20,4,11,'#2a62d8');
+  R(x-9,y-9,5,3,'#3a4a6a');R(x-11,y-7,2,6,'#3a4a6a');R(x-12,y-1,4,2,'#3a2a1a');
+  R(x-5,y-19,8,10,NAVY);R(x-5,y-12,8,1,GRN);R(x-5,y-11,8,1,GRY);
+  R(x-4,y-25,6,6,SKIN);R(x-4,y-21,6,2,'#6a3a1a');R(x-3,y-23,1,1,'#222');
+  R(x-5,y-28,8,4,NAVY);R(x-5,y-26,8,1,GRN);R(x-1,y-29,2,1,GRN);
+  R(x-8,y-15,3,2,NAVY);R(x-9,y-16,3,3,'#e8e8e8');R(x-9,y-16,3,1,'#8a5a3a');
+  if(wave){const a=Math.sin(t*10)>0?1:0;R(x+3,y-20-a,2,4,NAVY);R(x+3+a,y-25-a,3,3,SKIN)}else R(x+2,y-15,3,2,NAVY)}
+function drawHawksFlag(x,y,t){shadow(x,y,6);R(x,y-48,2,48,'#cfcfd4');R(x-1,y-50,4,2,'#ffd84a');
+  const NAVY='#0b2547',GRN='#69be28',GRY='#a5acaf';
+  for(let c=0;c<18;c++){const o=Math.round(Math.sin(t*5-c*.45)*1.6*(c/18));const fx=x+2+c,fy=y-47+o;
+    R(fx,fy,1,4,NAVY);R(fx,fy+4,1,2,GRN);R(fx,fy+6,1,1,GRY);R(fx,fy+7,1,4,NAVY)}}
+function drawHoop(x,y){shadow(x,y,10);R(x-1,y-40,3,40,'#5a5a62');R(x-1,y-40,1,40,'#7a7a82');R(x-1,y-2,3,2,'#333');
+  R(x-9,y-53,18,12,'#fff');R(x-9,y-53,18,1,'#ccc');R(x-9,y-42,18,1,'#bbb');
+  R(x-4,y-50,8,1,'#e8402a');R(x-4,y-50,1,5,'#e8402a');R(x+3,y-50,1,5,'#e8402a');
+  R(x-5,y-41,10,2,'#ff5a1a');for(let i=0;i<4;i++)R(x-4+i*3,y-39,1,5,'#f4f4f4');R(x-3,y-35,7,1,'#f4f4f4')}
+function drawBall(x,y,t){const b=Math.round(Math.abs(Math.sin(t*7))*9);shadow(x,y,8+Math.round((9-b)/2));const cy=y-5-b;
+  for(let dy=-4;dy<=4;dy++)for(let dx=-4;dx<=4;dx++)if(dx*dx+dy*dy<=17)R(x+dx,cy+dy,1,1,(dx*dx+dy*dy>12)?'#b8521a':'#e8742a');
+  R(x-4,cy,9,1,'#3a1a0a');R(x,cy-4,1,9,'#3a1a0a');R(x-2,cy-2,1,1,'#ffb07a')}
+function drawHoopTarget(x,y,t,hit){drawHoop(x,y);if(hit){const s=Math.round(Math.sin(t*14)*1);R(x-3+s,y-38,7,4,'#ffd84a');drawBall(x+12,y,t)}}
+function drawSign(x,y){R(x,y-34,2,34,'#7a7a82');R(x-17,y-42,36,9,'#1f7a3a');R(x-16,y-41,34,7,'#2a9a4a');R(x-17,y-42,36,1,'#fff');R(x-17,y-34,36,1,'#fff');
+  txt('DRYDEN RD',x+1,y-41,'#fff',5,'center')}
 function drawCan(x,y){shadow(x,y,14);
   R(x-5,y-13,10,12,'#7d8a94');R(x-3,y-13,1,12,'#5d6a74');R(x+1,y-13,1,12,'#5d6a74');R(x+4,y-13,1,12,'#9daab4');
   R(x-6,y-15,12,2,'#5d6a74');R(x-2,y-17,4,2,'#5d6a74')}
@@ -253,6 +283,8 @@ function drawLotGround(L){const sub=L.sub,um=L.u+75;
   for(let u=L.u;u<L.u+LOT;u+=20)gq(u,u+10,-700,-60,sub?'#4ea443':'#828a4f');
   gq(L.u+22,L.u+128,HF,HF+6,sub?'#d86aa0':'#6a6040');
   gq(um-14,um+14,HF,HF+12,'#c8c0a8');gq(um-6,um+6,HF+12,-60,sub?'#e0d6bc':'#a8a290');
+  if(L.hoop){gq(L.u+104,L.u+136,HF,-60,'#7a7a82');gq(L.u+104,L.u+136,HF,HF+3,'#6a6a72');gq(L.u+118,L.u+120,-130,-70,'#f4f4f4')}
+  if(L.pit){for(let i=0;i<6;i++)for(let j=0;j<3;j++)gq(L.u+20+i*7,L.u+26+i*7,-122+j*12,-111+j*12,(i+j)%2?'#c8b898':'#b8a888')}
   for(const p of L.landed){const a=P(p.u,p.v);R(a[0]-3,a[1]-1,7,3,'#f4f4ec');R(a[0]-3,a[1]+1,7,1,'#aaa')}}
 function drawHouse(L,t){
   const u0=L.u+25,u1=L.u+125,um=L.u+75,vb=-235,vf=HF,wh=44,rh=76,vr=-192,sub=L.sub;
@@ -297,13 +329,13 @@ function drawBanner(u,label,col){for(let i=0;i<17;i++)for(let r=0;r<2;r++)gq(u+r
 /* ---------- config ---------- */
 const DAYS=['MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY','SUNDAY'];
 // obstacles unlock day by day, Paperboy-style
-const UNLOCK=[['can','hydrant','grate','dancer'],['dog','tire'],['trike','skater'],['mower','rc'],['worker'],[],[]];
+const UNLOCK=[['can','hydrant','grate','dancer','dog'],['ball','tire'],['trike','skater'],['mower','rc'],['worker'],[],[]];
 const CFG={
   easy:{lives:5,papers:15,cap:25,base:52,min:28,max:100,dens:.45,densUp:.09,carDay:2,motoDay:4,carRate:.12,xRate:.28,xSpeed:65,assist:true,inv:2.5,unlockShift:0},
   normal:{lives:3,papers:10,cap:15,base:72,min:38,max:145,dens:.8,densUp:.15,carDay:0,motoDay:2,carRate:.28,xRate:.55,xSpeed:105,assist:false,inv:1.6,unlockShift:2}};
-const NICE={can:'trash cans',hydrant:'fire hydrants',grate:'storm drains',dancer:'breakdancers',dog:'dogs',tire:'rolling tires',trike:'tricycles',skater:'skateboarders',mower:'lawn mowers',rc:'RC cars',worker:'manhole workers'};
-const FOOT={can:[10,10],hydrant:[8,8],grate:[14,12],dog:[14,10],tire:[8,10],skater:[12,10],rc:[10,8],trike:[12,10],dancer:[14,12],mower:[16,14],worker:[16,14],car:[44,22],moto:[24,10],xcar:[22,44],tree:[10,10],mailbox:[6,6],bundle:[16,16],target:[8,8],ramp:[22,26]};
-const SMACK={tire:50,skater:100,rc:75,dancer:100,target:100,dog:50,trike:50};
+const NICE={can:'trash cans',hydrant:'fire hydrants',grate:'storm drains',dancer:'breakdancers',dog:'dogs',ball:'loose basketballs',tire:'rolling tires',trike:'tricycles',skater:'skateboarders',mower:'lawn mowers',rc:'RC cars',worker:'manhole workers'};
+const FOOT={ball:[8,8],hoop:[6,6],firepit:[18,14],fireguy:[12,10],flag:[4,4],hooptarget:[6,6],can:[10,10],hydrant:[8,8],grate:[14,12],dog:[14,10],tire:[8,10],skater:[12,10],rc:[10,8],trike:[12,10],dancer:[14,12],mower:[16,14],worker:[16,14],car:[44,22],moto:[24,10],xcar:[22,44],tree:[10,10],mailbox:[6,6],bundle:[16,16],target:[8,8],ramp:[22,26]};
+const SMACK={ball:50,hooptarget:150,tire:50,skater:100,rc:75,dancer:100,target:100,dog:50,trike:50};
 let mode='easy',cfg=CFG.easy,G=null,run=null,S='title';
 let best=0;try{best=+localStorage.getItem('paperRouteBest')||0}catch(e){}
 const rnd=Math.random;
@@ -311,18 +343,23 @@ const rnd=Math.random;
 function makeStreet(d,withObs){
   const n=20,lots=[];
   for(let i=0;i<n;i++)lots.push({u:120+i*LOT+(i>=10?INTER:0),sub:rnd()<.55,c:(i*3+d)%HOUSE.length,delivered:false,landed:[],mail:false,
-    hedge:i>0&&i!==10&&rnd()<.45,tree:rnd()<.5});
+    hedge:i>0&&i!==10&&i!==4&&rnd()<.45,tree:rnd()<.5,pit:i===4,hoop:i!==0&&i!==4&&i!==10&&rnd()<.3});
+  for(const L of lots){if(L.hoop||L.pit)L.tree=false}
   let subs=lots.filter(l=>l.sub).length;
   while(subs<10){const l=lots[Math.floor(rnd()*n)];if(!l.sub){l.sub=true;subs++}}
   while(subs>12){const l=lots[Math.floor(rnd()*n)];if(l.sub){l.sub=false;subs--}}
+  lots[4].sub=true;
   const iu=120+10*LOT+10,endU=lots[n-1].u+LOT+40,bonusEnd=endU+1000;
   const obs=[];
   for(const L of lots){if(L.hedge)obs.push({type:'hedge',u:L.u,v:-106});
     if(L.tree)obs.push({type:'tree',u:L.u+140,v:-118});
-    obs.push({type:'mailbox',u:L.u+150,v:-66,L})}
+    obs.push({type:'mailbox',u:L.u+150,v:-66,L});
+    if(L.hoop)obs.push({type:'hoop',u:L.u+120,v:-96});
+    if(L.pit){obs.push({type:'flag',u:L.u+8,v:-122});obs.push({type:'firepit',u:L.u+42,v:-100});obs.push({type:'fireguy',u:L.u+50,v:-118})}}
   if(withObs){
     const pool=[];const sh=mode==='normal'?cfg.unlockShift:0;
     for(let k=0;k<=Math.min(UNLOCK.length-1,d+sh);k++)pool.push(...UNLOCK[k]);
+    pool.push('dog','dog');
     let lastU=-999;const dens=cfg.dens+cfg.densUp*d;
     for(let i=0;i<n;i++){const L=lots[i];if(i===0)continue;
       const k=Math.floor(dens+rnd()),us=[];for(let j=0;j<k;j++)us.push(L.u+10+rnd()*(LOT-20));us.sort((a,b)=>a-b);
@@ -330,16 +367,18 @@ function makeStreet(d,withObs){
         switch(type){
           case'can':o.v=-54+rnd()*20;break;case'hydrant':o.v=-35;break;
           case'grate':o.v=rnd()<.6?-17:52;break;case'dancer':o.v=-46;break;
-          case'dog':o.v=-110+rnd()*60;break;case'tire':o.v=rnd()<.6?-45:5;o.u+=120;break;
+          case'dog':o.v=-110+rnd()*60;o.c=DOGC[Math.floor(rnd()*DOGC.length)];break;case'tire':o.v=rnd()<.6?-45:5;o.u+=120;break;
+          case'ball':o.v=rnd()<.6?-45:5;o.u+=120;break;
           case'trike':o.bv=-60;o.v=-60;break;case'skater':o.v=-45;o.bv=-45;o.u+=140;break;
           case'mower':o.v=-96;o.bu=o.u;break;case'rc':o.bv=20;o.v=20;o.u+=80;break;
           case'worker':o.v=5+rnd()*35;break}
         obs.push(o)}
       if(i%4===2)obs.push({type:'bundle',u:L.u+LOT/2,v:rnd()<.6?-45:10});
+      if(i!==4&&i!==10&&rnd()<.3)obs.push({type:'dog',u:L.u+95,v:-124,c:DOGC[Math.floor(rnd()*DOGC.length)],ph:0});
     }
     // bonus course: targets + ramps
     for(let u=endU+80,i=0;u<bonusEnd-60;u+=95,i++){
-      obs.push({type:'target',u,v:i%2?-95:-80});
+      obs.push(i%3===1?{type:'hooptarget',u,v:-92}:{type:'target',u,v:i%2?-95:-80});
       if(i%2===0)obs.push({type:'ramp',u:u+40,v:rnd()<.5?-44:16});
       else if(rnd()<.6)obs.push({type:'can',u:u+45,v:rnd()<.5?-50:30});
     }
@@ -358,7 +397,7 @@ function startDay(){
   const map=st.lots.map((l,i)=>(i===10?'<span style="display:inline-block;width:10px"></span>':'')+`<span style="display:inline-block;width:12px;height:16px;margin:1px;border:2px solid #000;background:${l.sub?HOUSE[l.c][0]:'#555'}"></span>`).join('');
   const sh=mode==='normal'?cfg.unlockShift:0;const newOnes=(UNLOCK[d+sh]||[]).map(k=>NICE[k]);
   const warn=[...newOnes];if(d===cfg.carDay)warn.push('cars');if(d===cfg.motoDay)warn.push('motorcycles');
-  show(`<h2>${DAYS[d]}</h2><div style="margin:6px 0 10px">${map}</div>
+  show(`<p class="small" style="margin:0 0 4px">DRYDEN ROAD</p><h2>${DAYS[d]}</h2><div style="margin:6px 0 10px">${map}</div>
   <p>Deliver to the <span class="y">${st.subs} bright houses</span>.</p>
   <p class="small">${d===0?'Toss papers into the mailboxes or onto porches.<br>Watch the crossroad in the middle!':warn.length?'New today: '+warn.join(', ')+'!':'More traffic today. Stay sharp!'}</p>
   <div class="row"><button class="primary" data-a="go">GO!</button></div>`);
@@ -403,7 +442,7 @@ panel.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)retu
   if(a==='title')title();
 });
 function title(){S='title';run=null;
-  show(`<h1>PAPER ROUTE</h1><p>Ride your bike and toss papers<br>to the <span class="y">bright houses</span>!</p>
+  show(`<h1>PAPER ROUTE</h1><p class="y" style="margin-top:-6px">DRYDEN ROAD EDITION</p><p>Ride your bike and toss papers<br>to the <span class="y">bright houses</span>!</p>
   <div class="row"><button class="primary" data-m="easy">EASY</button><button class="alt" data-m="normal">NORMAL</button></div>
   <p class="small" style="margin-top:16px">${isTouch?'Joystick: UP = faster, DOWN = brake,<br>LEFT / RIGHT = steer.<br>Red button throws to the left!':'Arrows / WASD: UP = faster, DOWN = brake,<br>LEFT / RIGHT = steer.<br>SPACE throws a paper to the left!'}</p>
   ${best?`<p class="small">BEST SCORE: ${best}</p>`:''}`)}
@@ -439,7 +478,7 @@ function crash(o){run.crash=1.1;run.speed=0;run.jump=0;SFX.crash();
   burst(run.u,run.v,14,['#ffd84a','#fff','#ff6a5a'],16);
   if(run.phase==='bonus'){pop(run.u,run.v,40,'CRASH!','#ff8a7a');run.bonusCrash=true}
   else{G.lives--;run.inv=cfg.inv+1.1;pop(run.u,run.v,40,G.lives>0?'OUCH!':'OH NO!','#ff8a7a')}
-  if(o&&o.type!=='hedge'&&o.type!=='tree'&&o.type!=='mailbox'&&o.type!=='grate'&&o.type!=='hydrant')o.dead=true}
+  if(o&&o.type!=='hedge'&&o.type!=='tree'&&o.type!=='mailbox'&&o.type!=='grate'&&o.type!=='hydrant'&&!['hoop','firepit','fireguy','flag','hooptarget'].includes(o.type))o.dead=true}
 const ov2=(au,av,aw,ah,bu,bv,bw,bh)=>Math.abs(au-bu)<(aw+bw)/2&&Math.abs(av-bv)<(ah+bh)/2;
 
 function update(dt){
@@ -466,9 +505,10 @@ function update(dt){
   // papers in flight
   for(const p of run.papers){const pv=p.v;p.u+=p.vu*dt;p.v+=p.vv*dt;p.age+=dt;
     for(const o of run.obs){if(o.dead||o.hit||!SMACK[o.type])continue;
-      if(o.type==='target'?ov2(p.u,p.v,10,10,o.u,o.v,14,14):ov2(p.u,p.v,10,10,o.u,o.v,FOOT[o.type][0],FOOT[o.type][1])){
+      if(o.type==='target'||o.type==='hooptarget'?ov2(p.u,p.v,10,10,o.u,o.v,o.type==='hooptarget'?18:14,o.type==='hooptarget'?18:14):ov2(p.u,p.v,10,10,o.u,o.v,FOOT[o.type][0],FOOT[o.type][1])){
         const pts=SMACK[o.type];G.score+=pts;p.dead=true;SFX.pick();burst(o.u,o.v,10,['#fff','#ffd84a'],10);
         if(o.type==='target'){o.hit=true;run.targets++;pop(o.u,o.v,40,'BULLSEYE +'+pts,'#ffd84a')}
+        else if(o.type==='hooptarget'){o.hit=true;run.targets++;pop(o.u,o.v,50,'SWISH! +'+pts,'#ffb04a')}
         else{o.dead=true;run.smacks++;pop(o.u,o.v,30,'BONK! +'+pts,'#ffd84a')}break}}
     if(p.dead)continue;
     if(run.phase==='street'&&pv>MAILV&&p.v<=MAILV){for(const L of run.lots){if(L.sub&&!L.delivered&&Math.abs(p.u-(L.u+150))<10){deliver(L,true);p.dead=true;break}}}
@@ -495,6 +535,8 @@ function update(dt){
       case'dog':if(Math.abs(o.u-run.u)<140){o.run=true;o.v+=Math.sign(run.v-o.v)*Math.min(Math.abs(run.v-o.v),32*dt);o.v=Math.max(-130,Math.min(-30,o.v));
         if(!o.barked){o.barked=true;SFX.bark()}}else o.run=false;break;
       case'tire':if(ahead)o.u-=45*dt;break;
+      case'ball':if(ahead)o.u-=50*dt;break;
+      case'fireguy':o.wave=Math.abs(o.u-run.u)<130;if(!o.cheered&&o.u-run.u<70){o.cheered=true;pop(o.u,o.v,44,'GO HAWKS!','#69be28')}break;
       case'skater':if(ahead){o.u-=38*dt;o.v=o.bv+Math.sin(run.t*2+o.ph)*8}break;
       case'rc':if(ahead){o.u-=22*dt;o.v=o.bv+Math.sin(run.t*2.6+o.ph)*24}break;
       case'trike':o.v=o.bv+Math.sin(run.t*.8+o.ph)*26;break;
@@ -507,7 +549,7 @@ function update(dt){
     if(ov2(run.u,run.v,10,12,o.u,o.v,f[0],f[1])){
       if(o.type==='bundle'){o.dead=true;run.paper=Math.min(cfg.cap,run.paper+5);SFX.pick();pop(o.u,o.v,30,'+5 PAPERS','#7ac8ff')}
       else if(o.type==='ramp'){if(run.jump<=0&&run.crash<=0){run.jump=.75;SFX.mail();pop(o.u,o.v,40,'JUMP!','#7dff8a');G.score+=25}}
-      else if(o.type==='target'){}
+      else if(o.type==='target'||o.type==='hooptarget'){}
       else if(!safe&&!(o.warn>0))crash(o);
     }
   }
@@ -537,7 +579,9 @@ function endDay(){if(S!=='play')return;S='results';const d=run.delivered,s=run.s
 function drawObj(o,t){const[x,y]=P(o.u,o.v).map(Math.round);
   switch(o.type){
     case'can':drawCan(x,y);break;case'hydrant':drawHydrant(x,y);break;case'grate':drawGrate(x,y);break;
-    case'dog':drawDog(x,y,t,o.run);break;case'tire':drawTire(x,y,t);break;case'skater':drawSkater(x,y,t);break;
+    case'dog':drawDog(x,y,t,o.run,o.c);break;case'ball':drawBall(x,y,t);break;case'hoop':drawHoop(x,y);break;
+    case'firepit':drawFirePit(x,y,t);break;case'fireguy':drawFireGuy(x,y,t,o.wave);break;case'flag':drawHawksFlag(x,y,t);break;
+    case'hooptarget':drawHoopTarget(x,y,t,o.hit);break;case'tire':drawTire(x,y,t);break;case'skater':drawSkater(x,y,t);break;
     case'rc':drawRC(x,y,t);break;case'trike':drawTrike(x,y,t);break;case'dancer':drawDancer(x,y,t);break;
     case'mower':drawMower(x,y,t);break;case'worker':drawWorker(x,y,t);break;case'moto':if(!(o.warn>0))drawMoto(x,y,t);break;
     case'car':if(!(o.warn>0))drawCar(o);break;case'xcar':if(!(o.warn>0))drawXCar(o);break;
@@ -569,6 +613,7 @@ function render(){
   for(const L of world.lots)if(L.u+LOT>uA&&L.u<uB)items.push({k:L.u+25,f:()=>drawHouse(L,t)});
   for(const o of world.obs)if(o.type!=='grate'&&o.u>uA&&o.u<uB)items.push({k:o.type==='car'?o.u-22:o.type==='hedge'?o.u+4:o.u,f:()=>drawObj(o,t)});
   for(let i=Math.floor(uA/95);i<uB/95;i++){const u=i*95;if(Math.abs(u-iu-35)<60)continue;const v=112+((i*53)%60+60)%60;items.push({k:u,f:()=>{const[x,y]=P(u,v).map(Math.round);drawTree(x,y,false)}})}
+  for(const su of[70,iu-8])if(su>uA&&su<uB)items.push({k:su,f:()=>{const[x,y]=P(su,-50).map(Math.round);drawSign(x,y)}});
   if(run){items.push({k:run.endU,f:()=>drawBanner(run.endU,'BONUS RUN','#3a7ae8')});items.push({k:run.bonusEnd,f:()=>drawBanner(run.bonusEnd,'FINISH','#e84a3a')});
     items.push({k:run.u,kid:1,f:()=>{
       const jh=run.jump>0?Math.sin(Math.PI*(1-run.jump/.75))*18:0;const[x,y]=P(run.u,run.v).map(Math.round);

@@ -38,6 +38,16 @@ body.is-touch #throw{display:flex}
 @keyframes rot{0%,30%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
 @media (orientation:portrait) and (max-width:900px){body.is-touch #rotate{display:flex}}
 </style>
+<style>*{touch-action:manipulation}html,body,canvas{touch-action:none}</style>
+<script>
+/* stop iPhone/iPad double-tap and pinch zoom from moving the game */
+(()=>{let last=0;
+document.addEventListener('touchend',e=>{const n=Date.now();if(n-last<400)e.preventDefault();last=n},{passive:false});
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('touchmove',e=>{if(e.touches.length>1||(e.scale&&e.scale!==1))e.preventDefault()},{passive:false});
+})();
+</script>
 </head>
 <body class="menu">
 <div id="wrap"><canvas id="c" width="480" height="270"></canvas></div>

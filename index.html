@@ -110,6 +110,9 @@
   .doodle .lid { transform-box: view-box; transform-origin: 12px 34px; }
   .proj:hover .lid, .proj:focus-visible .lid { animation: peek 1.4s cubic-bezier(.4,0,.2,1) infinite; }
   @keyframes peek { 0%, 20% { transform: none; } 45%, 70% { transform: translateY(-6px) rotate(-9deg); } 100% { transform: none; } }
+  .doodle .pin { transform-box: fill-box; transform-origin: 50% 100%; }
+  .proj:hover .pin, .proj:focus-visible .pin { animation: bob .7s cubic-bezier(.4,0,.2,1) infinite alternate; }
+  @keyframes bob { from { transform: none; } to { transform: translateY(-5px) scale(1.04, .97); } }
   @media (prefers-reduced-motion: reduce) { .wip-tag i { animation: none; } }
 
   @media (min-width: 760px) {
@@ -172,14 +175,19 @@
         <p>A holiday gift planner for the whole family. Describe each person in a sentence, swipe through ideas, and track prices.</p>
         <span class="go wip-tag"><i aria-hidden="true"></i>Work in progress</span>
       </div>
-      <div class="proj soon">
-        <svg class="doodle draw" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <path pathLength="1" d="M14 50 L 12 16 L 44 13 L 50 47 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path class="plus" pathLength="1" d="M31 22 L 32 40 M 23 31 L 41 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <div class="proj wip">
+        <svg class="doodle draw townhall" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path pathLength="1" d="M9 31 L 32 21 L 55 30 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path pathLength="1" d="M17 32 L 17.5 50 M 27 31.5 L 26.5 50.5 M 37 31 L 37.5 50 M 47 30.5 L 46.5 50" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path pathLength="1" d="M10 51 L 54 50 M 7 56.5 L 57 55.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <g class="pin">
+            <path pathLength="1" d="M32 3 C 25.5 3, 23.5 9, 26 13.5 L 32 21 L 38 13 C 40.5 8.5, 38 3, 32 3 Z" fill="var(--accent)" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="32" cy="9.5" r="2.4" fill="var(--paper)" stroke="currentColor" stroke-width="1.6"/>
+          </g>
         </svg>
-        <h3>Next project</h3>
-        <p>Something new is on the bench. Check back soon.</p>
-        <span class="go" style="color:var(--ink-3)">Coming soon</span>
+        <h3>MTCNOW</h3>
+        <p>One thing you can do this week to help Montclair: a town meeting, a quick email or a local cause, matched to how you can show up.</p>
+        <span class="go wip-tag"><i aria-hidden="true"></i>Work in progress</span>
       </div>
     </div>
   </div>

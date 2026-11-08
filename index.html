@@ -103,8 +103,20 @@
     .proj:hover *, .proj:focus-visible * { animation: none !important; }
   }
 
+  /* work in progress */
+  .wip-tag { color: var(--ink-2); }
+  .wip-tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 2.4s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .doodle .lid { transform-box: view-box; transform-origin: 12px 34px; }
+  .proj:hover .lid, .proj:focus-visible .lid { animation: peek 1.4s cubic-bezier(.4,0,.2,1) infinite; }
+  @keyframes peek { 0%, 20% { transform: none; } 45%, 70% { transform: translateY(-6px) rotate(-9deg); } 100% { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .wip-tag i { animation: none; } }
+
   @media (min-width: 760px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1040px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
   }
   a:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
 </style>
@@ -146,6 +158,20 @@
         <p>A retro, Paperboy-style bike game. Deliver papers down a diagonal street, dodge dogs and lawn mowers, and hit the bonus run.</p>
         <span class="go">Play <span aria-hidden="true">→</span></span>
       </a>
+      <div class="proj wip">
+        <svg class="doodle draw gift" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path pathLength="1" d="M15 34 L 49 33 L 47 58 L 17 59 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path pathLength="1" d="M32 34 L 32.5 58.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <g class="lid">
+            <path pathLength="1" d="M11 26 L 53 25 L 52 33.5 L 12 34.5 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path pathLength="1" d="M32 25.5 L 32 34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path class="bow" pathLength="1" d="M32 25 C 26 13, 15 15, 20 21 C 23 25, 29 25, 32 25 C 36 14, 48 13, 45 20 C 43 24, 36 25, 32 25 Z" fill="var(--accent)" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <h3>Giftwise</h3>
+        <p>A holiday gift planner for the whole family. Describe each person in a sentence, swipe through ideas, and track prices.</p>
+        <span class="go wip-tag"><i aria-hidden="true"></i>Work in progress</span>
+      </div>
       <div class="proj soon">
         <svg class="doodle draw" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path pathLength="1" d="M14 50 L 12 16 L 44 13 L 50 47 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
